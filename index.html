@@ -53,129 +53,115 @@
 
     /* ── HERO ── */
     .hero {
-      position: relative; min-height: 96vh;
-      display: grid; grid-template-columns: 1fr 1fr;
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: flex-end;
       overflow: hidden;
     }
-    /* Left: copy side */
+    /* Full-bleed background image */
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('hero.jpg');
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+    }
+    /* Multi-layer dark overlay — heavy at bottom for copy legibility, lighter at top */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top,
+          rgba(8,8,6,0.96) 0%,
+          rgba(8,8,6,0.82) 28%,
+          rgba(8,8,6,0.45) 55%,
+          rgba(8,8,6,0.18) 78%,
+          rgba(8,8,6,0.08) 100%
+        ),
+        linear-gradient(to right,
+          rgba(8,8,6,0.55) 0%,
+          rgba(8,8,6,0.1) 50%,
+          transparent 100%
+        );
+    }
+    /* Copy sits above overlay */
     .hero-copy {
       position: relative; z-index: 2;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 80px 64px 80px 72px;
-      background: var(--ink);
+      width: 100%;
+      padding: 0 72px 72px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 48px;
     }
-    .hero-copy::after {
-      content: '';
-      position: absolute; right: -1px; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.25), transparent);
-    }
-    .hero-kicker { margin-bottom: 32px; }
+    .hero-copy-left { max-width: 560px; }
+    .hero-kicker { margin-bottom: 28px; }
     .hero-h1 {
       font-family: var(--serif);
-      font-size: clamp(3rem, 5vw, 5.5rem);
-      font-weight: 700; line-height: 0.95;
-      letter-spacing: -0.02em;
+      font-size: clamp(3.8rem, 7vw, 7rem);
+      font-weight: 700; line-height: 0.93;
+      letter-spacing: -0.025em;
       color: var(--white);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      text-shadow: 0 2px 32px rgba(0,0,0,0.6);
     }
     .hero-h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
     .hero-tagline {
-      font-size: 0.85rem; font-weight: 300; line-height: 1.9;
-      color: var(--muted-2); max-width: 420px;
-      margin-bottom: 48px;
-      border-left: 1px solid rgba(201,169,110,0.3);
-      padding-left: 20px;
+      font-size: 0.88rem; font-weight: 300; line-height: 1.85;
+      color: rgba(255,255,255,0.65); max-width: 400px;
+      margin-bottom: 40px;
     }
-    .hero-ctas { display: flex; flex-direction: column; gap: 14px; max-width: 360px; }
+    .hero-trust {
+      display: flex; gap: 28px;
+      border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px;
+      margin-top: 8px;
+    }
+    .hero-trust-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-trust-val { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--accent); }
+    .hero-trust-label { font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    /* CTA stack — right side */
+    .hero-ctas {
+      display: flex; flex-direction: column; gap: 12px;
+      width: 320px; flex-shrink: 0;
+      padding-bottom: 4px;
+    }
     .btn-gold {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px;
+      padding: 16px 22px;
       background: var(--accent); color: var(--ink);
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
       border-radius: 2px; transition: background 0.25s; cursor: pointer; border: none;
       width: 100%;
     }
     .btn-gold:hover { background: #dfc07e; }
     .btn-gold-outline {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 15px 24px;
-      background: transparent; color: var(--white);
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.2);
+      padding: 15px 22px;
+      background: rgba(0,0,0,0.35); backdrop-filter: blur(6px);
+      color: var(--white);
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: pointer;
       width: 100%;
     }
     .btn-gold-outline:hover { border-color: var(--accent); color: var(--accent); }
     .btn-quiz {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 15px 24px;
-      background: transparent; color: var(--accent);
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-      border: 1px solid rgba(201,169,110,0.4);
-      border-radius: 2px; transition: background 0.2s, color 0.2s; cursor: pointer;
+      padding: 15px 22px;
+      background: rgba(0,0,0,0.35); backdrop-filter: blur(6px);
+      color: var(--accent);
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid rgba(201,169,110,0.45);
+      border-radius: 2px; transition: background 0.2s; cursor: pointer;
       width: 100%;
     }
-    .btn-quiz:hover { background: rgba(201,169,110,0.08); }
+    .btn-quiz:hover { background: rgba(201,169,110,0.12); }
     .btn-arrow { font-size: 1rem; font-weight: 300; }
-    .hero-trust {
-      margin-top: 52px; display: flex; gap: 32px;
-      border-top: 1px solid var(--line); padding-top: 28px;
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .hero-trust-item { display: flex; flex-direction: column; gap: 4px; }
-    .hero-trust-val { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-    .hero-trust-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-
-    /* Right: image side */
-    .hero-image {
-      position: relative; overflow: hidden;
-      background: #0d0d0b;
-    }
-    /* Hero image placeholder — replace with <img> tag for real photo */
-    .hero-image-inner {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to right, rgba(12,12,12,0.35) 0%, transparent 30%),
-        linear-gradient(160deg, #1a1710 0%, #0e0e09 30%, #111108 60%, #0a0a07 100%);
-      display: flex; align-items: center; justify-content: center;
-    }
-    /* Placeholder portrait silhouette */
-    .hero-image-placeholder {
-      width: 100%; height: 100%;
-      background:
-        radial-gradient(ellipse 55% 70% at 55% 38%, rgba(201,169,110,0.09) 0%, transparent 65%),
-        linear-gradient(160deg, #181510 0%, #0c0c08 50%, #0a0a07 100%);
-      display: flex; align-items: flex-end; justify-content: center;
-      overflow: hidden;
-    }
-    /* Subtle figure suggestion */
-    .hero-figure {
-      width: 68%;
-      height: 92%;
-      background: linear-gradient(to top, rgba(201,169,110,0.06) 0%, rgba(201,169,110,0.02) 60%, transparent 100%);
-      border-radius: 180px 180px 0 0;
-      border: 1px solid rgba(201,169,110,0.07);
-      border-bottom: none;
-      position: relative;
-    }
-    .hero-figure::before {
-      content: '';
-      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
-      width: 40%; aspect-ratio: 1;
-      background: rgba(201,169,110,0.04);
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,0.06);
-    }
-    .hero-image-label {
-      position: absolute; bottom: 28px; left: 28px; right: 28px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-    }
-    .hero-badge {
-      background: rgba(12,12,12,0.85); backdrop-filter: blur(8px);
-      border: 1px solid var(--line-m); border-radius: 3px;
-      padding: 12px 18px;
-    }
-    .hero-badge-line { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-    .hero-badge-val { font-family: var(--serif); font-size: 0.92rem; font-weight: 700; color: var(--white); }
+    .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.6)); }
+    .hero-scroll-label { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
 
     /* ── TRUST BAR ── */
     .trust-bar {
@@ -409,10 +395,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-copy { padding: 64px 40px; }
-      .hero-copy::after { display: none; }
-      .hero-image { min-height: 50vw; }
+      .hero-copy { padding: 0 40px 56px; flex-direction: column; align-items: flex-start; gap: 32px; }
+      .hero-ctas { width: 100%; max-width: 420px; }
       .featured-grid { grid-template-columns: 1fr 1fr; }
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
       .partner-strip-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -422,6 +406,10 @@
       .nav { padding: 0 24px; }
       .nav-links { display: none; }
       .nav-contact { display: none; }
+      .hero { min-height: 100svh; }
+      .hero-copy { padding: 0 24px 48px; }
+      .hero-h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
+      .hero-ctas { width: 100%; max-width: 100%; }
       .proof, .featured, .shop-all, .how, .testimonials, .contact, .partner-strip, .quiz-strip, .footer { padding-left: 24px; padding-right: 24px; }
       .trust-bar { padding: 0 24px; }
       .trust-bar-inner { flex-direction: column; }
@@ -464,73 +452,65 @@
 ════════════════════════════════════════ -->
 <section class="hero">
 
-  <!-- Left: copy -->
+  <!-- Full-bleed background image -->
+  <div class="hero-bg"></div>
+
+  <!-- Copy over the image -->
   <div class="hero-copy">
-    <div class="hero-kicker">
-      <span class="rule"></span>
-      <span class="eyebrow">HairDirect.co.za — Unisex Hair Solutions</span>
+
+    <!-- Left: headline + tagline + stats -->
+    <div class="hero-copy-left">
+      <div class="hero-kicker">
+        <span class="rule"></span>
+        <span class="eyebrow">HairDirect.co.za &mdash; For Men &amp; Women</span>
+      </div>
+      <h1 class="hero-h1">
+        Trusted.<br>
+        <em>Natural.</em><br>
+        Discreet.
+      </h1>
+      <p class="hero-tagline">
+        Precision hair systems, wigs and toppers for men and women across South Africa.
+        Engineered to disappear. Delivered direct to your door.
+      </p>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <span class="hero-trust-val">100%</span>
+          <span class="hero-trust-label">Human Remy hair</span>
+        </div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-val">Discreet</span>
+          <span class="hero-trust-label">Plain packaging</span>
+        </div>
+        <div class="hero-trust-item">
+          <span class="hero-trust-val">4 Cities</span>
+          <span class="hero-trust-label">Partner stylists</span>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-h1">
-      Trusted.<br>
-      <em>Natural.</em><br>
-      Discreet.
-    </h1>
-
-    <p class="hero-tagline">
-      Precision hair systems, wigs and toppers for men and women across South Africa.
-      Engineered to disappear. Delivered to your door.
-    </p>
-
+    <!-- Right: CTA buttons -->
     <div class="hero-ctas">
       <a class="btn-gold" href="#shop-all">
-        <span>Shop Systems — Men</span>
+        <span>Shop Systems &mdash; Men</span>
         <span class="btn-arrow">&#8594;</span>
       </a>
       <a class="btn-gold-outline" href="#shop-all">
-        <span>Shop Systems — Women</span>
+        <span>Shop Systems &mdash; Women</span>
         <span class="btn-arrow">&#8594;</span>
       </a>
       <a class="btn-quiz" href="#quiz">
-        <span>Not Sure? Take the Match Quiz</span>
+        <span>Not Sure? Take the Quiz</span>
         <span class="btn-arrow">&#8594;</span>
       </a>
     </div>
 
-    <div class="hero-trust">
-      <div class="hero-trust-item">
-        <span class="hero-trust-val">100%</span>
-        <span class="hero-trust-label">Human Remy hair</span>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-val">Discreet</span>
-        <span class="hero-trust-label">Plain packaging</span>
-      </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-val">4 Cities</span>
-        <span class="hero-trust-label">Partner stylists</span>
-      </div>
-    </div>
   </div>
 
-  <!-- Right: image -->
-  <div class="hero-image">
-    <div class="hero-image-inner">
-      <div class="hero-image-placeholder">
-        <div class="hero-figure"></div>
-      </div>
-    </div>
-    <!-- Overlaid badge — undetectable -->
-    <div class="hero-image-label">
-      <div class="hero-badge">
-        <div class="hero-badge-line">HD Swiss Lace</div>
-        <div class="hero-badge-val">Undetectable at the scalp line</div>
-      </div>
-      <div class="hero-badge">
-        <div class="hero-badge-line">Nationwide delivery</div>
-        <div class="hero-badge-val">Discreet. No branding.</div>
-      </div>
-    </div>
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-label">Scroll</span>
   </div>
 
 </section>
@@ -575,4 +555,13 @@
   <div class="ticker-track">
     <span class="ticker-item"><span>&#9670;</span> Undetectable at the scalp line</span>
     <span class="ticker-item"><span>&#9670;</span> HD Swiss lace &mdash; European Remy hair</span>
-    <span class="ticker-item"><span>&#96
+    <span class="ticker-item"><span>&#9670;</span> Full lace wigs &mdash; matched to your tone</span>
+    <span class="ticker-item"><span>&#9670;</span> Toppers for volume &amp; partial coverage</span>
+    <span class="ticker-item"><span>&#9670;</span> Discreet packaging &mdash; no branding</span>
+    <span class="ticker-item"><span>&#9670;</span> Partner stylists: Sandton &middot; Cape Town &middot; Durban &middot; Pretoria</span>
+    <span class="ticker-item"><span>&#9670;</span> Matched to your scalp tone. Precisely</span>
+    <span class="ticker-item"><span>&#9670;</span> 30-minute installation. Full life resumed</span>
+    <span class="ticker-item"><span>&#9670;</span> Undetectable at the scalp line</span>
+    <span class="ticker-item"><span>&#9670;</span> HD Swiss lace &mdash; European Remy hair</span>
+    <span class="ticker-item"><span>&#9670;</span> Full lace wigs &mdash; matched to your tone</span>
+    <span class="ticker-item"><span>&#9670;</span>
