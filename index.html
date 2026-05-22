@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HairDirect — Precision Hair. Perfectly Matched.</title>
+  <title>HairDirect — Trusted. Natural. Discreet.</title>
   <style>
     :root {
       color-scheme: dark;
@@ -23,11 +23,21 @@
     html { scroll-behavior: smooth; }
     body { background: var(--ink); color: var(--white); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
     .eyebrow { font-size: 0.63rem; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent); }
     .rule { display: inline-block; width: 28px; height: 1px; background: var(--accent); opacity: 0.55; vertical-align: middle; margin-right: 14px; }
+    .section-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+    .section-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.12; margin: 16px 0 18px; }
+    .section-header p { font-size: 0.9rem; color: var(--muted-2); line-height: 1.75; }
 
-    /* NAV */
-    .nav { position: sticky; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(12,12,12,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(12,12,12,0.97); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
     .nav-logo { display: flex; flex-direction: column; gap: 3px; }
     .nav-logo-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1; }
     .nav-logo-name span { color: var(--accent); }
@@ -35,75 +45,268 @@
     .nav-links { display: flex; gap: 40px; list-style: none; }
     .nav-links a { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; cursor: pointer; }
     .nav-links a:hover { color: var(--white); }
+    .nav-actions { display: flex; align-items: center; gap: 20px; }
+    .nav-contact { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; cursor: pointer; }
+    .nav-contact:hover { color: var(--accent); }
     .nav-btn { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 22px; border: 1px solid var(--accent); color: var(--accent); border-radius: 2px; transition: background 0.2s, color 0.2s; cursor: pointer; }
     .nav-btn:hover { background: var(--accent); color: var(--ink); }
 
-    /* HERO */
-    .hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden; background: linear-gradient(135deg, #080808 0%, #111008 40%, #0a0a08 70%, #0C0C0C 100%); }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(201,169,110,0.05) 0%, transparent 70%); pointer-events: none; }
-    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 80px 40px 56px; max-width: 880px; }
-    .hero-kicker { margin-bottom: 28px; }
-    .hero-h1 { font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 7.5rem); font-weight: 700; line-height: 0.93; letter-spacing: -0.02em; color: var(--white); margin-bottom: 28px; }
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 96vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    /* Left: copy side */
+    .hero-copy {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px 80px 72px;
+      background: var(--ink);
+    }
+    .hero-copy::after {
+      content: '';
+      position: absolute; right: -1px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.25), transparent);
+    }
+    .hero-kicker { margin-bottom: 32px; }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 700; line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
     .hero-h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
-    .hero-sub { font-size: 0.98rem; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,0.58); max-width: 500px; margin-bottom: 44px; }
-    .hero-ctas { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .btn-gold { display: inline-flex; align-items: center; gap: 12px; padding: 17px 40px; background: var(--accent); color: var(--ink); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; border-radius: 2px; transition: background 0.25s; cursor: pointer; border: none; }
+    .hero-tagline {
+      font-size: 0.85rem; font-weight: 300; line-height: 1.9;
+      color: var(--muted-2); max-width: 420px;
+      margin-bottom: 48px;
+      border-left: 1px solid rgba(201,169,110,0.3);
+      padding-left: 20px;
+    }
+    .hero-ctas { display: flex; flex-direction: column; gap: 14px; max-width: 360px; }
+    .btn-gold {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      background: var(--accent); color: var(--ink);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      border-radius: 2px; transition: background 0.25s; cursor: pointer; border: none;
+      width: 100%;
+    }
     .btn-gold:hover { background: #dfc07e; }
-    .btn-ghost { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.18); padding-bottom: 2px; transition: color 0.2s; cursor: pointer; }
-    .btn-ghost:hover { color: var(--white); }
-    .hero-scroll { margin-top: 64px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .hero-scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, var(--accent)); }
-    .hero-scroll-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+    .btn-gold-outline {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 24px;
+      background: transparent; color: var(--white);
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 2px; transition: border-color 0.2s, color 0.2s; cursor: pointer;
+      width: 100%;
+    }
+    .btn-gold-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-quiz {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 24px;
+      background: transparent; color: var(--accent);
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 2px; transition: background 0.2s, color 0.2s; cursor: pointer;
+      width: 100%;
+    }
+    .btn-quiz:hover { background: rgba(201,169,110,0.08); }
+    .btn-arrow { font-size: 1rem; font-weight: 300; }
+    .hero-trust {
+      margin-top: 52px; display: flex; gap: 32px;
+      border-top: 1px solid var(--line); padding-top: 28px;
+    }
+    .hero-trust-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-trust-val { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .hero-trust-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 
-    /* GENDER NAV */
-    .gender-bar { background: var(--ink-2); border-bottom: 1px solid var(--line); display: flex; justify-content: center; gap: 0; }
-    .gender-tab { padding: 16px 48px; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
-    .gender-tab.active { color: var(--white); border-bottom-color: var(--accent); }
-    .gender-tab:hover { color: var(--white); }
+    /* Right: image side */
+    .hero-image {
+      position: relative; overflow: hidden;
+      background: #0d0d0b;
+    }
+    /* Hero image placeholder — replace with <img> tag for real photo */
+    .hero-image-inner {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(12,12,12,0.35) 0%, transparent 30%),
+        linear-gradient(160deg, #1a1710 0%, #0e0e09 30%, #111108 60%, #0a0a07 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Placeholder portrait silhouette */
+    .hero-image-placeholder {
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 55% 70% at 55% 38%, rgba(201,169,110,0.09) 0%, transparent 65%),
+        linear-gradient(160deg, #181510 0%, #0c0c08 50%, #0a0a07 100%);
+      display: flex; align-items: flex-end; justify-content: center;
+      overflow: hidden;
+    }
+    /* Subtle figure suggestion */
+    .hero-figure {
+      width: 68%;
+      height: 92%;
+      background: linear-gradient(to top, rgba(201,169,110,0.06) 0%, rgba(201,169,110,0.02) 60%, transparent 100%);
+      border-radius: 180px 180px 0 0;
+      border: 1px solid rgba(201,169,110,0.07);
+      border-bottom: none;
+      position: relative;
+    }
+    .hero-figure::before {
+      content: '';
+      position: absolute; top: 14%; left: 50%; transform: translateX(-50%);
+      width: 40%; aspect-ratio: 1;
+      background: rgba(201,169,110,0.04);
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.06);
+    }
+    .hero-image-label {
+      position: absolute; bottom: 28px; left: 28px; right: 28px;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    .hero-badge {
+      background: rgba(12,12,12,0.85); backdrop-filter: blur(8px);
+      border: 1px solid var(--line-m); border-radius: 3px;
+      padding: 12px 18px;
+    }
+    .hero-badge-line { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .hero-badge-val { font-family: var(--serif); font-size: 0.92rem; font-weight: 700; color: var(--white); }
 
-    /* TICKER */
-    .ticker-wrap { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px 0; background: var(--ink-3); }
-    .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 32s linear infinite; }
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--ink-3);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 0 64px;
+    }
+    .trust-bar-inner {
+      display: flex; align-items: stretch;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .trust-bar-main {
+      flex: 1; padding: 28px 0;
+      display: flex; align-items: center; gap: 18px;
+      border-right: 1px solid var(--line);
+      padding-right: 48px;
+    }
+    .trust-bar-icon { font-size: 1.3rem; color: var(--accent); flex-shrink: 0; }
+    .trust-bar-copy { }
+    .trust-bar-title { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--white); margin-bottom: 3px; }
+    .trust-bar-sub { font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+    .trust-bar-contact {
+      padding: 28px 0 28px 48px;
+      display: flex; align-items: center; gap: 28px;
+    }
+    .trust-bar-contact-item { display: flex; align-items: center; gap: 10px; }
+    .trust-bar-contact-icon { font-size: 0.9rem; color: var(--accent); }
+    .trust-bar-contact-label { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .trust-bar-contact-val { font-size: 0.78rem; color: var(--white); font-weight: 500; }
+
+    /* ── TICKER ── */
+    .ticker-wrap { overflow: hidden; padding: 13px 0; background: var(--ink-2); border-bottom: 1px solid var(--line); }
+    .ticker-track { display: flex; gap: 0; white-space: nowrap; animation: ticker 34s linear infinite; }
     .ticker-track:hover { animation-play-state: paused; }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .ticker-item { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); padding: 0 36px; }
     .ticker-item span { color: var(--accent); margin-right: 10px; }
 
-    /* PROOF SECTION */
+    /* ── FEATURED PRODUCTS ── */
+    .featured { padding: 100px 64px; background: var(--ink); }
+    .featured-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 0; }
+    .feat-card {
+      position: relative; overflow: hidden;
+      background: var(--ink-2);
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      transition: transform 0.4s;
+    }
+    .feat-card:hover { transform: scale(1.015); }
+    .feat-card-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #181510, #0d0d09);
+    }
+    .feat-card-bg.men {
+      background: linear-gradient(135deg, #12110d 0%, #1a1810 50%, #0f0e0a 100%);
+    }
+    .feat-card-bg.women {
+      background: linear-gradient(135deg, #110d0d 0%, #1a1212 50%, #0f0a0a 100%);
+    }
+    .feat-card-bg.toppers {
+      background: linear-gradient(135deg, #0d1113 0%, #101a1c 50%, #0a0f10 100%);
+    }
+    .feat-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,6,0.92) 0%, rgba(8,8,6,0.3) 45%, transparent 70%);
+    }
+    .feat-card-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 28px;
+    }
+    .feat-card-tag { font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .feat-card-title { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; line-height: 1.15; margin-bottom: 10px; }
+    .feat-card-desc { font-size: 0.74rem; color: var(--muted-2); line-height: 1.65; margin-bottom: 22px; }
+    .feat-card-price { font-size: 0.7rem; color: var(--muted); margin-bottom: 18px; }
+    .feat-card-price strong { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; color: var(--white); }
+    .feat-card-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); border-bottom: 1px solid rgba(201,169,110,0.3);
+      padding-bottom: 2px; transition: border-color 0.2s;
+    }
+    .feat-card:hover .feat-card-cta { border-color: var(--accent); }
+    /* accent glow */
+    .feat-card-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 60%; aspect-ratio: 1;
+      border-radius: 50%;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .feat-card-glow.men { background: #C9A96E; }
+    .feat-card-glow.women { background: #e8a0a0; }
+    .feat-card-glow.toppers { background: #a0c8e8; }
+
+    /* ── VIDEO PROOF ── */
     .proof { padding: 100px 64px; background: var(--ink-2); }
     .proof-header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
     .proof-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.12; margin: 16px 0 18px; }
     .proof-header p { font-size: 0.9rem; color: var(--muted-2); line-height: 1.75; }
     .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .video-tile { position: relative; border-radius: 4px; overflow: hidden; cursor: pointer; background: var(--ink-3); aspect-ratio: 16/9; }
-    .video-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.5rem; color: rgba(201,169,110,0.15); letter-spacing: 0.1em; background: linear-gradient(135deg, #1a1a12, #111109); }
-    .video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; }
-    .video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 52px; height: 52px; border-radius: 50%; background: rgba(201,169,110,0.15); border: 1.5px solid rgba(201,169,110,0.5); display: flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.25s; pointer-events: none; }
-    .video-tile:hover .video-play { background: rgba(201,169,110,0.3); transform: translate(-50%, -50%) scale(1.08); }
+    .video-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.5rem; color: rgba(201,169,110,0.1); letter-spacing: 0.1em; background: linear-gradient(135deg, #1a1a12, #111109); }
+    .video-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; }
+    .video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 50%; background: rgba(201,169,110,0.12); border: 1.5px solid rgba(201,169,110,0.45); display: flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.25s; pointer-events: none; }
+    .video-tile:hover .video-play { background: rgba(201,169,110,0.28); transform: translate(-50%, -50%) scale(1.08); }
     .video-play svg { width: 18px; height: 18px; fill: var(--accent); margin-left: 3px; }
     .video-tag { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
     .video-title { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--white); line-height: 1.25; }
     .video-link { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 6px; display: inline-block; }
 
-    /* PRODUCTS */
-    .products { padding: 100px 64px; background: var(--ink); }
-    .products-header { text-align: center; max-width: 600px; margin: 0 auto 64px; }
-    .products-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.12; margin: 16px 0 18px; }
-    .products-header p { font-size: 0.9rem; color: var(--muted-2); line-height: 1.75; }
-    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    /* ── SHOP ALL ── */
+    .shop-all { padding: 100px 64px; background: var(--ink); }
+    .shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .product-card { background: var(--ink-2); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
     .product-card:hover { border-color: rgba(201,169,110,0.3); transform: translateY(-3px); }
-    .product-card-img { height: 200px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #111109, #1a1a12); font-family: var(--serif); font-size: 2.5rem; color: rgba(201,169,110,0.12); letter-spacing: 0.1em; }
-    .product-card-body { padding: 24px 22px 28px; }
+    .product-card-img { height: 190px; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.5rem; color: rgba(201,169,110,0.1); letter-spacing: 0.1em; }
+    .product-card-img.c1 { background: linear-gradient(135deg, #12110d, #1a1810); }
+    .product-card-img.c2 { background: linear-gradient(135deg, #110d0d, #1a1212); }
+    .product-card-img.c3 { background: linear-gradient(135deg, #0d1113, #101a1c); }
+    .product-card-img.c4 { background: linear-gradient(135deg, #0d1108, #131a0f); }
+    .product-card-body { padding: 22px 20px 26px; }
     .product-tag { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .product-name { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
-    .product-desc { font-size: 0.78rem; color: var(--muted-2); line-height: 1.7; margin-bottom: 20px; }
-    .product-price { font-size: 0.75rem; letter-spacing: 0.06em; color: var(--white); margin-bottom: 18px; }
-    .product-price strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; }
-    .btn-outline { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 20px; border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 2px; transition: background 0.2s, color 0.2s; cursor: pointer; }
+    .product-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+    .product-desc { font-size: 0.76rem; color: var(--muted-2); line-height: 1.7; margin-bottom: 18px; }
+    .product-price { font-size: 0.72rem; letter-spacing: 0.04em; color: var(--muted); margin-bottom: 16px; }
+    .product-price strong { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--white); }
+    .btn-outline { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px 20px; border: 1px solid var(--accent); color: var(--accent); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 2px; transition: background 0.2s, color 0.2s; cursor: pointer; gap: 8px; }
     .btn-outline:hover { background: var(--accent); color: var(--ink); }
 
-    /* HOW IT WORKS */
+    /* ── HOW IT WORKS ── */
     .how { padding: 100px 64px; background: var(--ink-2); }
     .how-inner { max-width: 1100px; margin: 0 auto; }
     .how-header { max-width: 560px; margin-bottom: 72px; }
@@ -111,60 +314,92 @@
     .how-header p { font-size: 0.9rem; color: var(--muted-2); line-height: 1.75; }
     .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
     .step { border-top: 1px solid var(--line-m); padding-top: 32px; }
-    .step-num { font-family: var(--serif); font-size: 3.5rem; font-weight: 700; color: rgba(201,169,110,0.14); line-height: 1; margin-bottom: 20px; }
+    .step-num { font-family: var(--serif); font-size: 3.5rem; font-weight: 700; color: rgba(201,169,110,0.13); line-height: 1; margin-bottom: 20px; }
     .step-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
     .step-desc { font-size: 0.82rem; color: var(--muted-2); line-height: 1.7; }
 
-    /* TESTIMONIALS */
+    /* ── TESTIMONIALS ── */
     .testimonials { padding: 100px 64px; background: var(--ink); }
-    .testimonials-header { text-align: center; margin-bottom: 64px; }
-    .testimonials-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.15; margin-top: 16px; }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
     .tcard { background: var(--ink-2); border: 1px solid var(--line); border-radius: 4px; padding: 32px; }
     .tcard-stars { color: var(--accent); font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 18px; }
-    .tcard-quote { font-family: var(--serif); font-size: 0.97rem; font-weight: 400; line-height: 1.65; color: var(--muted-2); margin-bottom: 24px; font-style: italic; }
+    .tcard-quote { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; line-height: 1.65; color: var(--muted-2); margin-bottom: 24px; font-style: italic; }
     .tcard-author { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 
-    /* QUIZ CTA */
-    .quiz-cta { padding: 100px 64px; background: var(--ink-2); }
-    .quiz-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .quiz-copy h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.1; margin: 16px 0 24px; }
-    .quiz-copy p { font-size: 0.9rem; color: var(--muted-2); line-height: 1.8; margin-bottom: 40px; }
-    .quiz-stats { display: flex; gap: 48px; margin-top: 40px; }
-    .quiz-stat-val { font-family: var(--serif); font-size: 2.25rem; font-weight: 700; color: var(--accent); line-height: 1; }
-    .quiz-stat-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
-    .quiz-visual { background: linear-gradient(135deg, #111109, #1a1912); border-radius: 4px; padding: 44px 38px; border: 1px solid var(--line); }
-    .quiz-q { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-    .quiz-question { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; margin-bottom: 26px; line-height: 1.35; }
-    .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-    .quiz-opt { padding: 13px 18px; border: 1px solid var(--line-m); border-radius: 3px; font-size: 0.8rem; color: var(--muted-2); cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-    .quiz-opt:hover, .quiz-opt.selected { border-color: var(--accent); background: rgba(201,169,110,0.06); color: var(--white); }
-    .quiz-progress { display: flex; gap: 6px; margin-bottom: 10px; }
-    .quiz-dot { width: 24px; height: 3px; border-radius: 2px; background: var(--line-m); }
-    .quiz-dot.active { background: var(--accent); }
-    .quiz-progress-label { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+    /* ── CONTACT ── */
+    .contact { padding: 100px 64px; background: var(--ink-3); border-top: 1px solid var(--line); }
+    .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-copy h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.1; margin: 16px 0 20px; }
+    .contact-copy p { font-size: 0.88rem; color: var(--muted-2); line-height: 1.8; margin-bottom: 36px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 16px; }
+    .contact-method { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--ink-2); border: 1px solid var(--line); border-radius: 3px; transition: border-color 0.2s; cursor: pointer; }
+    .contact-method:hover { border-color: rgba(201,169,110,0.25); }
+    .contact-method-icon { font-size: 1.1rem; color: var(--accent); width: 24px; text-align: center; flex-shrink: 0; }
+    .contact-method-body { flex: 1; }
+    .contact-method-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .contact-method-val { font-size: 0.82rem; color: var(--white); font-weight: 500; }
+    .contact-method-arrow { font-size: 0.9rem; color: var(--muted); }
+    .contact-form { background: var(--ink-2); border: 1px solid var(--line); border-radius: 4px; padding: 36px 32px; }
+    .contact-form h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+    .form-row { margin-bottom: 16px; }
+    .form-row label { display: block; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%; padding: 12px 14px;
+      background: var(--ink-3); border: 1px solid var(--line-m);
+      border-radius: 2px; color: var(--white); font-family: var(--sans); font-size: 0.84rem;
+      outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus { border-color: rgba(201,169,110,0.5); }
+    .form-row textarea { height: 90px; resize: vertical; }
+    .form-row select { cursor: pointer; }
+    .form-row select option { background: #1C1C1C; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-submit {
+      width: 100%; padding: 14px 24px; margin-top: 8px;
+      background: var(--accent); color: var(--ink);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s;
+    }
+    .form-submit:hover { background: #dfc07e; }
+    .form-note { font-size: 0.6rem; color: var(--muted); text-align: center; margin-top: 12px; letter-spacing: 0.04em; }
 
-    /* PARTNER STRIP */
-    .partner-strip { padding: 80px 64px; background: var(--ink-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    /* ── QUIZ STRIP ── */
+    .quiz-strip { padding: 64px; background: var(--ink-2); border-top: 1px solid var(--line); }
+    .quiz-strip-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+    .quiz-strip-copy { flex: 1; }
+    .quiz-strip-copy h2 { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 700; line-height: 1.1; margin: 12px 0 16px; }
+    .quiz-strip-copy p { font-size: 0.85rem; color: var(--muted-2); line-height: 1.75; max-width: 480px; }
+    .quiz-strip-cta { flex-shrink: 0; }
+
+    /* ── PARTNER STRIP ── */
+    .partner-strip { padding: 72px 64px; background: var(--ink-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .partner-strip-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: center; }
     .partner-copy h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; line-height: 1.2; margin: 12px 0 16px; }
     .partner-copy p { font-size: 0.85rem; color: var(--muted-2); line-height: 1.75; margin-bottom: 28px; }
-    .partner-cities { display: flex; gap: 24px; flex-wrap: wrap; }
-    .city-pill { padding: 8px 18px; border: 1px solid var(--line-m); border-radius: 2px; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2); }
+    .partner-cities { display: flex; gap: 12px; flex-wrap: wrap; }
+    .city-pill { padding: 8px 16px; border: 1px solid var(--line-m); border-radius: 2px; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted-2); }
     .partner-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .p-stat { border-left: 1px solid var(--line-m); padding-left: 24px; }
     .p-stat-val { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--white); }
     .p-stat-label { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 
-    /* FOOTER */
-    .footer { border-top: 1px solid var(--line); padding: 48px 64px; background: var(--ink); }
-    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-    .footer-logo { font-family: var(--serif); font-size: 1rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
+    /* ── FOOTER ── */
+    .footer { border-top: 1px solid var(--line); padding: 56px 64px 40px; background: var(--ink); }
+    .footer-top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 48px; margin-bottom: 48px; }
+    .footer-brand { }
+    .footer-logo { font-family: var(--serif); font-size: 1rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
     .footer-logo span { color: var(--accent); }
-    .footer-tagline { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
-    .footer-cols { display: flex; gap: 64px; }
-    .footer-col h4 { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .footer-col a { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 10px; transition: color 0.2s; cursor: pointer; }
+    .footer-tagline { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; line-height: 1.7; max-width: 220px; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 14px; }
+    .footer-social a { width: 32px; height: 32px; border: 1px solid var(--line-m); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--muted); transition: color 0.2s, border-color 0.2s; cursor: pointer; }
+    .footer-social a:hover { color: var(--accent); border-color: rgba(201,169,110,0.3); }
+    .footer-col h4 { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+    .footer-col a { display: block; font-size: 0.72rem; color: var(--muted); margin-bottom: 11px; transition: color 0.2s; cursor: pointer; }
     .footer-col a:hover { color: var(--white); }
     .footer-bottom { border-top: 1px solid var(--line); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
     .footer-copy { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em; }
@@ -172,353 +407,172 @@
     .footer-legal a { font-size: 0.62rem; color: var(--muted); transition: color 0.2s; cursor: pointer; }
     .footer-legal a:hover { color: var(--white); }
 
-    @media (max-width: 960px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-copy { padding: 64px 40px; }
+      .hero-copy::after { display: none; }
+      .hero-image { min-height: 50vw; }
+      .featured-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .partner-strip-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 800px) {
       .nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .proof, .products, .how, .testimonials, .quiz-cta, .footer, .partner-strip { padding-left: 24px; padding-right: 24px; }
+      .nav-contact { display: none; }
+      .proof, .featured, .shop-all, .how, .testimonials, .contact, .partner-strip, .quiz-strip, .footer { padding-left: 24px; padding-right: 24px; }
+      .trust-bar { padding: 0 24px; }
+      .trust-bar-inner { flex-direction: column; }
+      .trust-bar-main { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 20px; }
+      .trust-bar-contact { padding-left: 0; flex-direction: column; align-items: flex-start; gap: 16px; }
       .proof-grid, .how-steps, .testimonials-grid { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .quiz-inner { grid-template-columns: 1fr; }
-      .partner-strip-inner { grid-template-columns: 1fr; gap: 40px; }
-      .footer-top { flex-direction: column; gap: 40px; }
-      .footer-cols { flex-wrap: wrap; gap: 40px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .shop-grid { grid-template-columns: repeat(2, 1fr); }
+      .quiz-strip-inner { flex-direction: column; gap: 28px; }
+      .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
 <nav class="nav">
   <div class="nav-logo">
     <div class="nav-logo-name">HairDirect<span>.co.za</span></div>
     <div class="nav-logo-sub">Serving South Africa, Nationwide</div>
   </div>
   <ul class="nav-links">
-    <li><a href="#">Shop</a></li>
-    <li><a href="#">How It Works</a></li>
-    <li><a href="#">Partner Stylists</a></li>
-    <li><a href="#">Maintenance</a></li>
-    <li><a href="#">About</a></li>
+    <li><a href="#shop-all">Shop</a></li>
+    <li><a href="#proof">Real Results</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact">Contact Us</a></li>
   </ul>
-  <a class="nav-btn">Find My Match</a>
+  <div class="nav-actions">
+    <a class="nav-contact" href="#contact">WhatsApp Us</a>
+    <a class="nav-btn" href="#quiz">Find My Match</a>
+  </div>
 </nav>
 
-<!-- HERO -->
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-content">
+
+  <!-- Left: copy -->
+  <div class="hero-copy">
     <div class="hero-kicker">
       <span class="rule"></span>
-      <span class="eyebrow">HairDirect.co.za &mdash; Precision Hair. Perfectly Matched.</span>
+      <span class="eyebrow">HairDirect.co.za — Unisex Hair Solutions</span>
     </div>
-    <h1 class="hero-h1">Invisible.<br><em>Undeniable.</em><br>Yours.</h1>
-    <p class="hero-sub">Precision hair systems, wigs, and toppers for those who live at full intensity. Engineered to disappear. Designed to last.</p>
+
+    <h1 class="hero-h1">
+      Trusted.<br>
+      <em>Natural.</em><br>
+      Discreet.
+    </h1>
+
+    <p class="hero-tagline">
+      Precision hair systems, wigs and toppers for men and women across South Africa.
+      Engineered to disappear. Delivered to your door.
+    </p>
+
     <div class="hero-ctas">
-      <a class="btn-gold">Find My Match &#8594;</a>
-      <a class="btn-ghost">See how it works</a>
+      <a class="btn-gold" href="#shop-all">
+        <span>Shop Systems — Men</span>
+        <span class="btn-arrow">&#8594;</span>
+      </a>
+      <a class="btn-gold-outline" href="#shop-all">
+        <span>Shop Systems — Women</span>
+        <span class="btn-arrow">&#8594;</span>
+      </a>
+      <a class="btn-quiz" href="#quiz">
+        <span>Not Sure? Take the Match Quiz</span>
+        <span class="btn-arrow">&#8594;</span>
+      </a>
     </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-      <span class="hero-scroll-label">Scroll</span>
+
+    <div class="hero-trust">
+      <div class="hero-trust-item">
+        <span class="hero-trust-val">100%</span>
+        <span class="hero-trust-label">Human Remy hair</span>
+      </div>
+      <div class="hero-trust-item">
+        <span class="hero-trust-val">Discreet</span>
+        <span class="hero-trust-label">Plain packaging</span>
+      </div>
+      <div class="hero-trust-item">
+        <span class="hero-trust-val">4 Cities</span>
+        <span class="hero-trust-label">Partner stylists</span>
+      </div>
     </div>
   </div>
+
+  <!-- Right: image -->
+  <div class="hero-image">
+    <div class="hero-image-inner">
+      <div class="hero-image-placeholder">
+        <div class="hero-figure"></div>
+      </div>
+    </div>
+    <!-- Overlaid badge — undetectable -->
+    <div class="hero-image-label">
+      <div class="hero-badge">
+        <div class="hero-badge-line">HD Swiss Lace</div>
+        <div class="hero-badge-val">Undetectable at the scalp line</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-line">Nationwide delivery</div>
+        <div class="hero-badge-val">Discreet. No branding.</div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
-<!-- GENDER BAR -->
-<div class="gender-bar">
-  <div class="gender-tab active">For Men</div>
-  <div class="gender-tab">For Women</div>
-  <div class="gender-tab">Toppers &amp; Partials</div>
-  <div class="gender-tab">Maintenance</div>
+
+<!-- ═══════════════════════════════════════
+     TRUST BAR
+════════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-bar-main">
+      <div class="trust-bar-icon">&#128274;</div>
+      <div class="trust-bar-copy">
+        <div class="trust-bar-title">Safe &amp; Discreet Purchase — Direct to Your Door</div>
+        <div class="trust-bar-sub">Plain packaging. No branding. Delivered nationwide. Or contact us for personalised, one-on-one service from our team.</div>
+      </div>
+    </div>
+    <div class="trust-bar-contact">
+      <div class="trust-bar-contact-item">
+        <div class="trust-bar-contact-icon">&#128241;</div>
+        <div>
+          <div class="trust-bar-contact-label">WhatsApp</div>
+          <div class="trust-bar-contact-val">+27 00 000 0000</div>
+        </div>
+      </div>
+      <div class="trust-bar-contact-item">
+        <div class="trust-bar-contact-icon">&#128140;</div>
+        <div>
+          <div class="trust-bar-contact-label">Email</div>
+          <div class="trust-bar-contact-val">hello@hairdirect.co.za</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- TICKER -->
+
+<!-- ═══════════════════════════════════════
+     TICKER
+════════════════════════════════════════ -->
 <div class="ticker-wrap">
   <div class="ticker-track">
     <span class="ticker-item"><span>&#9670;</span> Undetectable at the scalp line</span>
-    <span class="ticker-item"><span>&#9670;</span> HD Swiss lace. European Remy hair</span>
-    <span class="ticker-item"><span>&#9670;</span> Full lace wigs. Matched to your tone</span>
-    <span class="ticker-item"><span>&#9670;</span> Toppers for volume and partial coverage</span>
-    <span class="ticker-item"><span>&#9670;</span> Discreet packaging. No branding</span>
-    <span class="ticker-item"><span>&#9670;</span> Partner stylists. Sandton. Cape Town. Durban</span>
-    <span class="ticker-item"><span>&#9670;</span> Matched to your scalp tone. Precisely</span>
-    <span class="ticker-item"><span>&#9670;</span> 30-minute installation. Full life resumed</span>
-    <span class="ticker-item"><span>&#9670;</span> Undetectable at the scalp line</span>
-    <span class="ticker-item"><span>&#9670;</span> HD Swiss lace. European Remy hair</span>
-    <span class="ticker-item"><span>&#9670;</span> Full lace wigs. Matched to your tone</span>
-    <span class="ticker-item"><span>&#9670;</span> Toppers for volume and partial coverage</span>
-    <span class="ticker-item"><span>&#9670;</span> Discreet packaging. No branding</span>
-    <span class="ticker-item"><span>&#9670;</span> Partner stylists. Sandton. Cape Town. Durban</span>
-    <span class="ticker-item"><span>&#9670;</span> Matched to your scalp tone. Precisely</span>
-    <span class="ticker-item"><span>&#9670;</span> 30-minute installation. Full life resumed</span>
-  </div>
-</div>
-
-<!-- PROOF SECTION -->
-<section class="proof">
-  <div class="proof-header">
-    <span class="eyebrow"><span class="rule"></span>The Invisible Edge</span>
-    <h2>Scepticism is rational.<br>Watch first. Decide after.</h2>
-    <p>We built this section for one reason: to answer the question you have not asked out loud yet. Will it look real? Will anyone know? Watch. Then decide.</p>
-  </div>
-  <div class="proof-grid">
-    <div class="video-tile" onclick="window.open('https://www.youtube.com/watch?v=gUutre5iKIM','_blank')">
-      <div class="video-placeholder">I</div>
-      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="video-overlay">
-        <div class="video-tag">Chapter 01 &mdash; The Science</div>
-        <div class="video-title">Why HD lace disappears at the hairline</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=gUutre5iKIM" target="_blank">Watch on YouTube &#8599;</a>
-      </div>
-    </div>
-    <div class="video-tile" onclick="window.open('https://www.youtube.com/watch?v=ZS_zbXLq3Oo','_blank')">
-      <div class="video-placeholder">II</div>
-      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="video-overlay">
-        <div class="video-tag">Chapter 02 &mdash; A Full Life</div>
-        <div class="video-title">Swimming. Gym. Wind. No compromises</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=ZS_zbXLq3Oo" target="_blank">Watch on YouTube &#8599;</a>
-      </div>
-    </div>
-    <div class="video-tile" onclick="window.open('https://www.youtube.com/watch?v=yKVtgXmAcrc','_blank')">
-      <div class="video-placeholder">III</div>
-      <div class="video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="video-overlay">
-        <div class="video-tag">Chapter 03 &mdash; The Reveal</div>
-        <div class="video-title">Before, during, after. Unfiltered</div>
-        <a class="video-link" href="https://www.youtube.com/watch?v=yKVtgXmAcrc" target="_blank">Watch on YouTube &#8599;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products">
-  <div class="products-header">
-    <span class="eyebrow"><span class="rule"></span>The Range</span>
-    <h2>One standard.<br>Four paths to it.</h2>
-    <p>Every piece is engineered to the same specification. HD lace. Human Remy hair. Matched to your scalp tone. The only variable is how you wear it.</p>
-  </div>
-  <div class="products-grid">
-
-    <div class="product-card">
-      <div class="product-card-img">&#8544;</div>
-      <div class="product-card-body">
-        <div class="product-tag">For Men</div>
-        <div class="product-name">Hair Systems</div>
-        <p class="product-desc">HD Swiss lace. European Remy hair. Bonded at the scalp line. Undetectable in every condition. Matched to your colour and density.</p>
-        <div class="product-price">From <strong>R4,200</strong></div>
-        <a class="btn-outline">Shop Systems</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">&#8545;</div>
-      <div class="product-card-body">
-        <div class="product-tag">For Women</div>
-        <div class="product-name">Wigs</div>
-        <p class="product-desc">Full lace and lace-front wigs in human Remy hair. Every density. Every texture. Matched to your natural tone or styled to a new one.</p>
-        <div class="product-price">From <strong>R3,800</strong></div>
-        <a class="btn-outline">Shop Wigs</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">&#8546;</div>
-      <div class="product-card-body">
-        <div class="product-tag">For All</div>
-        <div class="product-name">Toppers &amp; Partials</div>
-        <p class="product-desc">Clip-in volume and coverage for partial hair loss. Blends invisibly with your existing hair. Available in a range of base sizes and densities.</p>
-        <div class="product-price">From <strong>R1,950</strong></div>
-        <a class="btn-outline">Shop Toppers</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-card-img">&#8547;</div>
-      <div class="product-card-body">
-        <div class="product-tag">Subscription</div>
-        <div class="product-name">Maintenance Club</div>
-        <p class="product-desc">Monthly adhesive, solvent, scalp care, and conditioning. Everything to keep your piece performing. Delivered discreetly. Cancel any time.</p>
-        <div class="product-price">From <strong>R680 /mo</strong></div>
-        <a class="btn-outline">Join the Club</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how">
-  <div class="how-inner">
-    <div class="how-header">
-      <span class="eyebrow"><span class="rule"></span>How It Works</span>
-      <h2>Three steps.<br>One outcome.</h2>
-      <p>No clinics. No consultants. No commitment beyond your first order.</p>
-    </div>
-    <div class="how-steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-title">Take the Match Quiz</div>
-        <p class="step-desc">Three minutes. Your hair colour, texture preference, scalp tone, density, and lifestyle. We map it to your exact specification across every product category. No sales call required.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-title">Receive Your Piece</div>
-        <p class="step-desc">Plain packaging. No branding. Delivered to your door with a full installation guide, or handed directly to your partner stylist on day one.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-title">Live Without Compromise</div>
-        <p class="step-desc">Gym. Pool. Wind. Humidity. Full intensity. Maintained monthly with your Maintenance Club delivery. Replaced on your schedule. That is the standard.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PARTNER STRIP -->
-<section class="partner-strip">
-  <div class="partner-strip-inner">
-    <div class="partner-copy">
-      <span class="eyebrow"><span class="rule"></span>Partner Stylists</span>
-      <h3>Installation by someone who has done this before.</h3>
-      <p>Our verified partner stylists are trained on every piece in the range. Book directly through the site. Walk in. Walk out. Done in 30 minutes.</p>
-      <div class="partner-cities">
-        <span class="city-pill">Sandton</span>
-        <span class="city-pill">Cape Town</span>
-        <span class="city-pill">Durban</span>
-        <span class="city-pill">Pretoria</span>
-      </div>
-    </div>
-    <div class="partner-stats">
-      <div class="p-stat">
-        <div class="p-stat-val">30</div>
-        <div class="p-stat-label">Minute install</div>
-      </div>
-      <div class="p-stat">
-        <div class="p-stat-val">4+</div>
-        <div class="p-stat-label">Cities covered</div>
-      </div>
-      <div class="p-stat">
-        <div class="p-stat-val">100%</div>
-        <div class="p-stat-label">Verified stylists</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="testimonials-header">
-    <span class="eyebrow"><span class="rule"></span>Client Results</span>
-    <h2>Names withheld.<br>Results are not.</h2>
-  </div>
-  <div class="testimonials-grid">
-    <div class="tcard">
-      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="tcard-quote">"I wore it to a board meeting three days after it arrived. No one looked twice. That was the test I needed to pass."</p>
-      <div class="tcard-author">Executive. Sandton. Male. 41.</div>
-    </div>
-    <div class="tcard">
-      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="tcard-quote">"I have worn wigs for six years. Nothing has sat this naturally. The lace is genuinely invisible and the colour match was exact on the first order."</p>
-      <div class="tcard-author">Creative Director. Cape Town. Female. 38.</div>
-    </div>
-    <div class="tcard">
-      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="tcard-quote">"The topper changed my life. I had tried everything. This blended on the first clip. My hairdresser could not tell where it started."</p>
-      <div class="tcard-author">Entrepreneur. Johannesburg. Female. 44.</div>
-    </div>
-  </div>
-</section>
-
-<!-- QUIZ CTA -->
-<section class="quiz-cta">
-  <div class="quiz-inner">
-    <div class="quiz-copy">
-      <span class="eyebrow"><span class="rule"></span>The Match Quiz</span>
-      <h2>3 minutes.<br>Your exact match.<br>No sales call.</h2>
-      <p>We ask five questions. You get a precise product recommendation across every category, a scalp-tone match, a density profile, and a direct path to checkout. No follow-up unless you want one.</p>
-      <a class="btn-gold" style="display:inline-flex;">Start the Quiz &#8594;</a>
-      <div class="quiz-stats">
-        <div>
-          <div class="quiz-stat-val">94%</div>
-          <div class="quiz-stat-label">Match accuracy</div>
-        </div>
-        <div>
-          <div class="quiz-stat-val">3 min</div>
-          <div class="quiz-stat-label">Avg. completion</div>
-        </div>
-        <div>
-          <div class="quiz-stat-val">R0</div>
-          <div class="quiz-stat-label">Cost to discover</div>
-        </div>
-      </div>
-    </div>
-    <div class="quiz-visual">
-      <div class="quiz-progress">
-        <div class="quiz-dot active"></div>
-        <div class="quiz-dot active"></div>
-        <div class="quiz-dot"></div>
-        <div class="quiz-dot"></div>
-        <div class="quiz-dot"></div>
-      </div>
-      <div class="quiz-progress-label">Question 2 of 5</div>
-      <div class="quiz-q">Product Type</div>
-      <div class="quiz-question">What are you looking for?</div>
-      <div class="quiz-options">
-        <div class="quiz-opt">A hair system &mdash; full coverage, bonded</div>
-        <div class="quiz-opt selected">A wig &mdash; full coverage, removable</div>
-        <div class="quiz-opt">A topper &mdash; partial coverage, clip-in</div>
-      </div>
-      <a class="btn-gold" style="width:100%; justify-content:center;">Next Question &#8594;</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-top">
-    <div>
-      <div class="footer-logo">HairDirect<span>.co.za</span></div>
-      <div class="footer-tagline">Precision hair. Perfectly matched. &mdash; Serving South Africa, Nationwide</div>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <a href="#">Hair Systems</a>
-        <a href="#">Wigs</a>
-        <a href="#">Toppers &amp; Partials</a>
-        <a href="#">Maintenance Club</a>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="#">How It Works</a>
-        <a href="#">Partner Stylists</a>
-        <a href="#">About</a>
-        <a href="#">FAQ</a>
-      </div>
-      <div class="footer-col">
-        <h4>Account</h4>
-        <a href="#">Take the Quiz</a>
-        <a href="#">Book a Consultation</a>
-        <a href="#">My Orders</a>
-        <a href="#">Manage Subscription</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">&copy; 2025 HairDirect. All rights reserved. South Africa.</div>
-    <div class="footer-legal">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms &amp; Conditions</a>
-      <a href="#">Refund Policy</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Gender tab interaction
-  document.querySelectorAll('.gender-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.gender-tab').fo
+    <span class="ticker-item"><span>&#9670;</span> HD Swiss lace &mdash; European Remy hair</span>
+    <span class="ticker-item"><span>&#96
